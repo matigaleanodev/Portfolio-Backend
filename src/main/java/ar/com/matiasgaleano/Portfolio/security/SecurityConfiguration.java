@@ -2,6 +2,7 @@ package ar.com.matiasgaleano.Portfolio.security;
 
 import ar.com.matiasgaleano.Portfolio.security.jwt.JWTAuthenticationFilter;
 import ar.com.matiasgaleano.Portfolio.security.jwt.JWTLoginFilter;
+import java.time.Duration;
 import java.util.Arrays;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,10 +45,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   public CorsConfigurationSource corsConfigurationSource() {
     final CorsConfiguration config = new CorsConfiguration();
 
+    config.setAllowedHeaders(Arrays.asList("Origin,Accept", "X-Requested-With", "Content-Type", "Access-Control-Request-Method", "Access-Control-Request-Headers", "Authorization"));
+    config.setExposedHeaders(Arrays.asList("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"));
+    config.setAllowedOrigins(Arrays.asList("/*"));
+    config.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "PUT", "PATCH"));
     config.addAllowedOrigin("*");
+    config.setMaxAge(Duration.ZERO);
     config.setAllowCredentials(Boolean.TRUE);
-    config.setAllowedHeaders(Arrays.asList("Origin,Accept", "X-Requested-With", "Content-Type", "Access-Control-Request-Method", "Access-Control-Request-Headers"));
-    config.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "DELETE", "PUT", "PATCH"));
 
     final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", config);
