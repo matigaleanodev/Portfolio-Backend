@@ -47,7 +47,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     config.setAllowedHeaders(Arrays.asList("Origin,Accept", "X-Requested-With", "Content-Type", "Access-Control-Request-Method", "Access-Control-Request-Headers", "Authorization"));
     config.setExposedHeaders(Arrays.asList("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"));
-    config.setAllowedOrigins(Arrays.asList("/*"));
+    config.setAllowedOrigins(Arrays.asList("http://localhost:4200/"));
     config.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "PUT", "PATCH"));
     config.addAllowedOrigin("*");
     config.setMaxAge(Duration.ZERO);
