@@ -31,7 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.cors().and().csrf().disable().authorizeRequests()
-            .antMatchers(HttpMethod.POST, "/auth/**").permitAll()
+            .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
             .antMatchers(HttpMethod.POST, "/contact/**").permitAll()
             .antMatchers(HttpMethod.GET, "/api/**").permitAll()
             .anyRequest().authenticated()
@@ -39,9 +39,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .addFilter(new JWTLoginFilter(authenticationManager()))
             .addFilter(new JWTAuthenticationFilter(authenticationManager()));
   }
-  
+
   @Bean
-public CorsConfigurationSource corsConfigurationSource() {
+  public CorsConfigurationSource corsConfigurationSource() {
     final CorsConfiguration config = new CorsConfiguration();
 
     config.addAllowedOrigin("*");
@@ -53,7 +53,7 @@ public CorsConfigurationSource corsConfigurationSource() {
     source.registerCorsConfiguration("/**", config);
 
     return source;
-}
+  }
 
   @Override
   public void configure(AuthenticationManagerBuilder auth) throws Exception {
