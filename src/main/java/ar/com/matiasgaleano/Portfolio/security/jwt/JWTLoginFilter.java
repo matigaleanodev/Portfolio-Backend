@@ -56,7 +56,7 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
             .setIssuedAt(new Date())
             .setExpiration(new Date(System.currentTimeMillis() + 60 * 60 * 24 * 1000))            
             .compact();
-    res.addHeader("Authorization", "Bearer " + token);
+    res.getWriter().write("Bearer " + token);
   }
 
 }
