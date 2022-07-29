@@ -2,8 +2,6 @@ package ar.com.matiasgaleano.Portfolio.security;
 
 import ar.com.matiasgaleano.Portfolio.security.jwt.JWTAuthenticationFilter;
 import ar.com.matiasgaleano.Portfolio.security.jwt.JWTLoginFilter;
-import java.time.Duration;
-import java.util.Arrays;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -32,13 +30,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.csrf().disable().authorizeRequests()
-            .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
-            .antMatchers(HttpMethod.POST, "/contact/**").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/**").permitAll()
-            .anyRequest().authenticated()
-            .and()
-            .addFilter(new JWTLoginFilter(authenticationManager()))
-            .addFilter(new JWTAuthenticationFilter(authenticationManager()));
+        .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
+        .antMatchers(HttpMethod.POST, "/contact/**").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/**").permitAll()
+        .anyRequest().authenticated()
+        .and()
+        .cors()
+        .configurationSource(corsConfigurationSource())
+        .and()
+        .addFilter(new JWTLoginFilter(authenticationManager()))
+        .addFilter(new JWTAuthenticationFilter(authenticationManager()));
   }
 
   @Bean
