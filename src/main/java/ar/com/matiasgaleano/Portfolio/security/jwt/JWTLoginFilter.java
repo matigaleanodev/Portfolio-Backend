@@ -58,7 +58,6 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
             .compact();
     res.addHeader("Access-Control-Allow-Origin", "*");
     res.setContentType("application/json");
-    res.setCharacterEncoding("UTF-8");
     res.getWriter().write("Bearer " + token);
     
     
