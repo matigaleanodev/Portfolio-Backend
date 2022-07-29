@@ -53,6 +53,7 @@ public class DataController {
   
   
   @PostMapping("/image")
+  @CrossOrigin(origins = "*")
   public ResponseEntity<?> addImage(@RequestParam("file") MultipartFile image) {
     imgServ.saveImage(image);
     return new ResponseEntity(new Message("Imagen Guardada"), HttpStatus.OK);
@@ -80,6 +81,7 @@ public class DataController {
   }
 
   @PostMapping("/work")
+  @CrossOrigin(origins = "*")
   public ResponseEntity<?> addWork(@RequestBody Work data) {
     workServ.addWork(data);
     return new ResponseEntity(new Message("Trabajo Agregado"), HttpStatus.OK);
