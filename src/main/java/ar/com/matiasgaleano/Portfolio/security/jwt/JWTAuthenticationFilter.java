@@ -23,7 +23,6 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
           HttpServletResponse res,
           FilterChain chain) throws IOException, ServletException {
     String header = req.getHeader("Authorization");
-    res.addHeader("Access-Control-Allow-Origin", "*");
 
     if (header == null || !header.startsWith("Bearer ")) {
       chain.doFilter(req, res);
