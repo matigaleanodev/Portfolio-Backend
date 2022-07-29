@@ -2,6 +2,7 @@ package ar.com.matiasgaleano.Portfolio.security;
 
 import ar.com.matiasgaleano.Portfolio.security.jwt.JWTAuthenticationFilter;
 import ar.com.matiasgaleano.Portfolio.security.jwt.JWTLoginFilter;
+import java.util.Arrays;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -45,12 +46,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Bean
   public CorsConfigurationSource corsConfigurationSource() {
     final CorsConfiguration config = new CorsConfiguration();
-    config.addAllowedOrigin("*");
-    config.addAllowedHeader("*");
-    config.addAllowedMethod("GET");
-    config.addAllowedMethod("POST");
-    config.addAllowedMethod("PUT");
-    config.addAllowedMethod("DELETE");
+    config.setAllowedOrigins(Arrays.asList("*"));
+    config.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
+    config.setAllowedHeaders(Arrays.asList("*"));
 
     final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", config);
