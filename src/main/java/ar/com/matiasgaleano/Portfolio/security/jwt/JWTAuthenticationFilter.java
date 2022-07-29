@@ -17,41 +17,43 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
+
   public JWTAuthenticationFilter(AuthenticationManager authManager) {
-        super(authManager);
-    }  
-  
-   @Override
-    protected void doFilterInternal(HttpServletRequest req,
-                                    HttpServletResponse res,
-                                    FilterChain chain) throws IOException, ServletException {
-        String header = req.getHeader("Authorization");
+    super(authManager);
+  }
 
-        if (header == null || !header.startsWith("Bearer ")) {
-            chain.doFilter(req, res);
-            return;
-        }
+  @Override
+  protected void doFilterInternal(HttpServletRequest req,
+          HttpServletResponse res,
+          FilterChain chain) throws IOException, ServletException {
+    String header = req.getHeader("Authorization");    
+    res.addHeader("Access-Control-Allow-Origin", "*");
 
-        UsernamePasswordAuthenticationToken authentication = getAuthentication(req);
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        chain.doFilter(req, res);
+    if (header == null || !header.startsWith("Bearer ")) {
+      chain.doFilter(req, res);
+      return;
     }
 
-    private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
-        String token = request.getHeader("Authorization");
-        if (token != null) {
-            String user = Jwts.parser()
-                    .setSigningKey("ArtSabFSNFZ")
-                    .parseClaimsJws(token.replace("Bearer ", ""))
-                    .getBody()
-                    .getSubject();
+    UsernamePasswordAuthenticationToken authentication = getAuthentication(req);
 
-            if (user != null) {
-                return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
-            }
-            return null;
-        }
-        return null;
+    SecurityContextHolder.getContext().setAuthentication(authentication);
+    chain.doFilter(req, res);
+  }
+
+  private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
+    String token = request.getHeader("Authorization");
+    if (token != null) {
+      String user = Jwts.parser()
+              .setSigningKey("ArtSabFSNFZ")
+              .parseClaimsJws(token.replace("Bearer ", ""))
+              .getBody()
+              .getSubject();
+
+      if (user != null) {
+        return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+      }
+      return null;
     }
+    return null;
+  }
 }

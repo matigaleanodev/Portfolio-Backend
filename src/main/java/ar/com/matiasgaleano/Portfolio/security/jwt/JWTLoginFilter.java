@@ -56,10 +56,11 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
             .setIssuedAt(new Date())
             .setExpiration(new Date(System.currentTimeMillis() + 60 * 60 * 24 * 1000))            
             .compact();
-    res.addHeader("Authorization", "Bearer " + token);
     res.addHeader("Access-Control-Allow-Origin", "*");
-    res.getWriter().write("Bearer " + token);
     res.setContentType("application/json");
+    res.setCharacterEncoding("UTF-8");
+    res.getWriter().write("Bearer " + token);
+    
     
   }
 
