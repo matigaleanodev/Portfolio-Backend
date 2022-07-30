@@ -1,8 +1,11 @@
 package ar.com.matiasgaleano.Portfolio.security.controller;
 
+import ar.com.matiasgaleano.Portfolio.controller.Message;
 import ar.com.matiasgaleano.Portfolio.security.model.JwtUser;
 import ar.com.matiasgaleano.Portfolio.security.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,8 +26,9 @@ public class AuthController {
 
 
   @PostMapping("/signup")
-  public void signUp(@RequestBody JwtUser user) {
+  public ResponseEntity<?> ignUp(@RequestBody JwtUser user) {
     user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-    userRepo.save(user);  
+    userRepo.save(user);
+    return new ResponseEntity(new Message("Nuevo Usuario Registrado"), HttpStatus.OK);
   }
 }
