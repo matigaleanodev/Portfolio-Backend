@@ -1,5 +1,6 @@
 package ar.com.matiasgaleano.Portfolio.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +18,7 @@ public class Profile {
   private Long id;
   private String name;
   private String image;
+  @Column(columnDefinition="TEXT")
   private String description;
 
   public Profile() {
