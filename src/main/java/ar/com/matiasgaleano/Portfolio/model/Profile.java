@@ -18,7 +18,7 @@ public class Profile {
   private Long id;
   private String name;
   private String image;
-  @Column(columnDefinition="TEXT")
+  @Column(columnDefinition = "TEXT")
   private String description;
 
   public Profile() {

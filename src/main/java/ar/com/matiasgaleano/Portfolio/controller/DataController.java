@@ -29,27 +29,25 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/api")
 public class DataController {
-  
+
   @Autowired
   private IImageService imgServ;
 
   @Autowired
   private IWorkService workServ;
-  
+
   @Autowired
   private IEducationService educServ;
-  
+
   @Autowired
   private IProjectService projServ;
-  
+
   @Autowired
   private IHardSkillService hSkillServ;
-  
+
   @Autowired
   private ISoftSkillService sSkillServ;
-  
-  
-  
+
   @PostMapping("/image")
   public ResponseEntity<?> addImage(@RequestParam("file") MultipartFile image) {
     imgServ.saveImage(image);
@@ -65,7 +63,7 @@ public class DataController {
   public ResponseEntity<?> deleteImage(@PathVariable("name") String name) {
     imgServ.deleteImage(name);
     return new ResponseEntity(new Message("Imagen Borrada"), HttpStatus.OK);
-  }  
+  }
 
   @GetMapping("/work")
   public ResponseEntity<List<Work>> getWorkList() {
@@ -87,7 +85,7 @@ public class DataController {
   @PutMapping("/work")
   public ResponseEntity<?> editWork(@RequestBody Work data) {
     workServ.editWork(data);
-     return new ResponseEntity(new Message("Trabajo actualizado"), HttpStatus.OK);
+    return new ResponseEntity(new Message("Trabajo actualizado"), HttpStatus.OK);
   }
 
   @DeleteMapping("work/{id}")
@@ -95,7 +93,7 @@ public class DataController {
     workServ.deleteWork(id);
     return new ResponseEntity(new Message("Trabajo borrado"), HttpStatus.OK);
   }
-  
+
   @GetMapping("/education")
   public ResponseEntity<List<Education>> getEducationList() {
     return new ResponseEntity(educServ.getEducationList(), HttpStatus.OK);
@@ -123,10 +121,10 @@ public class DataController {
     educServ.deleteEducation(id);
     return new ResponseEntity(new Message("Educacion Borrada"), HttpStatus.OK);
   }
-  
+
   @GetMapping("/project")
   public ResponseEntity<List<Project>> getProjecs() {
-    return new ResponseEntity(projServ.getProjectList(), HttpStatus.OK);    
+    return new ResponseEntity(projServ.getProjectList(), HttpStatus.OK);
   }
 
   @GetMapping("/project/{id}")
@@ -151,57 +149,57 @@ public class DataController {
     projServ.deleteProject(id);
     return new ResponseEntity(new Message("Proyecto Borrado"), HttpStatus.OK);
   }
-  
+
   @GetMapping("/hardskill")
-  public ResponseEntity<List<HardSkill>> getHSkills(){
+  public ResponseEntity<List<HardSkill>> getHSkills() {
     return new ResponseEntity(hSkillServ.getSkillList(), HttpStatus.OK);
   }
-  
+
   @GetMapping("/hardskill/{id}")
-  public ResponseEntity<HardSkill> getHSkill(@PathVariable Long id){
+  public ResponseEntity<HardSkill> getHSkill(@PathVariable Long id) {
     return new ResponseEntity(hSkillServ.getSkill(id), HttpStatus.OK);
   }
-  
+
   @PostMapping("/hardskill")
   public ResponseEntity<?> addHSkill(@RequestBody HardSkill data) {
     hSkillServ.addSkill(data);
     return new ResponseEntity(new Message("Skill Agregada"), HttpStatus.OK);
   }
-  
+
   @PutMapping("/hardskill")
-  public ResponseEntity<List<HardSkill>> editHSkills(@RequestBody HardSkill data){
+  public ResponseEntity<List<HardSkill>> editHSkills(@RequestBody HardSkill data) {
     hSkillServ.editSkill(data);
     return new ResponseEntity(new Message("Skill editada"), HttpStatus.OK);
   }
-  
+
   @DeleteMapping("/hardskill/{id}")
   public ResponseEntity<?> deleteHSkill(@PathVariable Long id) {
     hSkillServ.deleteSkill(id);
     return new ResponseEntity(new Message("Skill Borrada"), HttpStatus.OK);
   }
-  
+
   @GetMapping("/softskill")
-  public ResponseEntity<List<SoftSkill>> getSSkills(){
+  public ResponseEntity<List<SoftSkill>> getSSkills() {
     return new ResponseEntity(sSkillServ.getSkillList(), HttpStatus.OK);
   }
-  
+
   @GetMapping("/softskill/{id}")
-  public ResponseEntity<SoftSkill> getSSkill(@PathVariable Long id){
+  public ResponseEntity<SoftSkill> getSSkill(@PathVariable Long id) {
     return new ResponseEntity(sSkillServ.getSkill(id), HttpStatus.OK);
   }
-  
+
   @PostMapping("/softskill")
   public ResponseEntity<?> addSSkill(@RequestBody SoftSkill data) {
     sSkillServ.addSkill(data);
     return new ResponseEntity(new Message("Skill Agregada"), HttpStatus.OK);
   }
-  
+
   @PutMapping("/softskill")
-  public ResponseEntity<List<HardSkill>> editSSkills(@RequestBody SoftSkill data){
+  public ResponseEntity<List<HardSkill>> editSSkills(@RequestBody SoftSkill data) {
     sSkillServ.editSkill(data);
     return new ResponseEntity(new Message("Skill editada"), HttpStatus.OK);
   }
-  
+
   @DeleteMapping("/softskill/{id}")
   public ResponseEntity<?> deleteSSkill(@PathVariable Long id) {
     sSkillServ.deleteSkill(id);

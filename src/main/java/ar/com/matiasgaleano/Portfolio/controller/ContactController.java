@@ -17,30 +17,30 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/contact")
 public class ContactController {
-  
+
   @Autowired
   private IContactService contactServ;
-  
+
   @GetMapping
-  public ResponseEntity<List<Contact>> getContactList(){
+  public ResponseEntity<List<Contact>> getContactList() {
     return new ResponseEntity(contactServ.getContactList(), HttpStatus.OK);
   }
-  
+
   @GetMapping("/{id}")
-  public ResponseEntity<Contact> getContact(@PathVariable Long id){
+  public ResponseEntity<Contact> getContact(@PathVariable Long id) {
     return new ResponseEntity(contactServ.getContact(id), HttpStatus.OK);
   }
-  
+
   @PostMapping
-  public ResponseEntity<?> addContact(@RequestBody Contact data){
+  public ResponseEntity<?> addContact(@RequestBody Contact data) {
     contactServ.addContact(data);
     return new ResponseEntity(new Message("Mensaje Agregado"), HttpStatus.OK);
   }
-  
+
   @DeleteMapping("/{id}")
-  public ResponseEntity<?> deleteContact(@PathVariable Long id){
+  public ResponseEntity<?> deleteContact(@PathVariable Long id) {
     contactServ.deleteContact(id);
     return new ResponseEntity(new Message("Mensaje borrado"), HttpStatus.OK);
   }
-  
+
 }
