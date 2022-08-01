@@ -11,4 +11,6 @@ public interface IProfileService {
   
   public void editProfile(Profile prof);
   
+  public void deleteProfile(Long id);
+  
 }

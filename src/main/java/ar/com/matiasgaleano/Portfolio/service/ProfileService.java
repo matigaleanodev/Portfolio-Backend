@@ -28,4 +28,9 @@ public class ProfileService implements IProfileService {
     profRepo.save(prof);
   }
   
+  @Override
+  public void deleteProfile(Long id) {
+    profRepo.deleteById(id);
+  }
+  
 }
