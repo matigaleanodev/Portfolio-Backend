@@ -18,7 +18,7 @@ public class Profile {
   private Long id;
   private String name;
   private String subtitle;
-  private String location;
+  private String adress;
   private String image;
   @Column(columnDefinition = "TEXT")
   private String description;
@@ -26,11 +26,11 @@ public class Profile {
   public Profile() {
   }
 
-  public Profile(Long id, String name, String subtitle, String location, String image, String description) {
+  public Profile(Long id, String name, String subtitle, String adress, String image, String description) {
     this.id = id;
     this.name = name;
     this.subtitle = subtitle;
-    this.location = location;
+    this.adress = adress;
     this.image = image;
     this.description = description;
   }
