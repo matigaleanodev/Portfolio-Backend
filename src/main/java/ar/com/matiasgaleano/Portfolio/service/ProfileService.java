@@ -1,8 +1,8 @@
 package ar.com.matiasgaleano.Portfolio.service;
 
-import ar.com.matiasgaleano.Portfolio.service.interfaces.IProfileService;
 import ar.com.matiasgaleano.Portfolio.model.Profile;
-import ar.com.matiasgaleano.Portfolio.repository.ProfileRepository;
+import ar.com.matiasgaleano.Portfolio.repository.ProfileRepo;
+import ar.com.matiasgaleano.Portfolio.service.interfaces.IProfileService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class ProfileService implements IProfileService {
   
   @Autowired
-  public ProfileRepository profRepo;
+  ProfileRepo profRepo;
 
   @Override
   public List<Profile> getProfile() {
@@ -19,7 +19,7 @@ public class ProfileService implements IProfileService {
   }
 
   @Override
-  public void postProfile(Profile prof) {
+  public void addProfile(Profile prof) {
     profRepo.save(prof);
   }
 
@@ -27,7 +27,7 @@ public class ProfileService implements IProfileService {
   public void editProfile(Profile prof) {
     profRepo.save(prof);
   }
-  
+
   @Override
   public void deleteProfile(Long id) {
     profRepo.deleteById(id);

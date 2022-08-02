@@ -7,7 +7,7 @@ public interface IProfileService {
   
   public List<Profile> getProfile();
   
-  public void postProfile(Profile prof);
+  public void addProfile(Profile prof);
   
   public void editProfile(Profile prof);
   

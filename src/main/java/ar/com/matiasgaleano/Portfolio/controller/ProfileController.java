@@ -28,7 +28,7 @@ public class ProfileController {
 
   @PostMapping("/profile")
   public ResponseEntity<?> postProfile(Profile prof) {
-    profServ.postProfile(prof);
+    profServ.addProfile(prof);
     return new ResponseEntity(new Message("Perfil Creado"), HttpStatus.OK);
   }
 
