@@ -1,17 +1,11 @@
 package ar.com.matiasgaleano.Portfolio.controller;
 
 import ar.com.matiasgaleano.Portfolio.model.Education;
-import ar.com.matiasgaleano.Portfolio.model.HardSkill;
-import ar.com.matiasgaleano.Portfolio.model.Profile;
 import ar.com.matiasgaleano.Portfolio.model.Project;
-import ar.com.matiasgaleano.Portfolio.model.SoftSkill;
 import ar.com.matiasgaleano.Portfolio.model.Work;
 import ar.com.matiasgaleano.Portfolio.service.interfaces.IEducationService;
-import ar.com.matiasgaleano.Portfolio.service.interfaces.IHardSkillService;
 import ar.com.matiasgaleano.Portfolio.service.interfaces.IImageService;
-import ar.com.matiasgaleano.Portfolio.service.interfaces.IProfileService;
 import ar.com.matiasgaleano.Portfolio.service.interfaces.IProjectService;
-import ar.com.matiasgaleano.Portfolio.service.interfaces.ISoftSkillService;
 import ar.com.matiasgaleano.Portfolio.service.interfaces.IWorkService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,15 +37,6 @@ public class DataController {
 
   @Autowired
   private IProjectService projServ;
-
-  @Autowired
-  private IHardSkillService hSkillServ;
-
-  @Autowired
-  private ISoftSkillService sSkillServ;
-  
-   @Autowired
-  private IProfileService profServ;
 
   @PostMapping("/image")
   public ResponseEntity<?> addImage(@RequestParam("file") MultipartFile image) {
@@ -154,84 +139,5 @@ public class DataController {
     projServ.deleteProject(id);
     return new ResponseEntity(new Message("Proyecto Borrado"), HttpStatus.OK);
   }
-
-  @GetMapping("/hardskill")
-  public ResponseEntity<List<HardSkill>> getHSkills() {
-    return new ResponseEntity(hSkillServ.getSkillList(), HttpStatus.OK);
-  }
-
-  @GetMapping("/hardskill/{id}")
-  public ResponseEntity<HardSkill> getHSkill(@PathVariable Long id) {
-    return new ResponseEntity(hSkillServ.getSkill(id), HttpStatus.OK);
-  }
-
-  @PostMapping("/hardskill")
-  public ResponseEntity<?> addHSkill(@RequestBody HardSkill data) {
-    hSkillServ.addSkill(data);
-    return new ResponseEntity(new Message("Skill Agregada"), HttpStatus.OK);
-  }
-
-  @PutMapping("/hardskill")
-  public ResponseEntity<List<HardSkill>> editHSkills(@RequestBody HardSkill data) {
-    hSkillServ.editSkill(data);
-    return new ResponseEntity(new Message("Skill editada"), HttpStatus.OK);
-  }
-
-  @DeleteMapping("/hardskill/{id}")
-  public ResponseEntity<?> deleteHSkill(@PathVariable Long id) {
-    hSkillServ.deleteSkill(id);
-    return new ResponseEntity(new Message("Skill Borrada"), HttpStatus.OK);
-  }
-
-  @GetMapping("/softskill")
-  public ResponseEntity<List<SoftSkill>> getSSkills() {
-    return new ResponseEntity(sSkillServ.getSkillList(), HttpStatus.OK);
-  }
-
-  @GetMapping("/softskill/{id}")
-  public ResponseEntity<SoftSkill> getSSkill(@PathVariable Long id) {
-    return new ResponseEntity(sSkillServ.getSkill(id), HttpStatus.OK);
-  }
-
-  @PostMapping("/softskill")
-  public ResponseEntity<?> addSSkill(@RequestBody SoftSkill data) {
-    sSkillServ.addSkill(data);
-    return new ResponseEntity(new Message("Skill Agregada"), HttpStatus.OK);
-  }
-
-  @PutMapping("/softskill")
-  public ResponseEntity<List<HardSkill>> editSSkills(@RequestBody SoftSkill data) {
-    sSkillServ.editSkill(data);
-    return new ResponseEntity(new Message("Skill editada"), HttpStatus.OK);
-  }
-
-  @DeleteMapping("/softskill/{id}")
-  public ResponseEntity<?> deleteSSkill(@PathVariable Long id) {
-    sSkillServ.deleteSkill(id);
-    return new ResponseEntity(new Message("Skill Borrada"), HttpStatus.OK);
-  }
   
-  @GetMapping("/profile")
-  public ResponseEntity<List<Profile>> getProfile() {
-    return new ResponseEntity(profServ.getProfile(), HttpStatus.OK);
-  }
-
-  @PostMapping("/profile")
-  public ResponseEntity<?> postProfile(Profile prof) {
-    profServ.addProfile(prof);
-    return new ResponseEntity(new Message("Perfil Creado"), HttpStatus.OK);
-  }
-
-  @PutMapping("/profile")
-  public ResponseEntity<?> editProfile(Profile prof) {
-    profServ.editProfile(prof);
-    return new ResponseEntity(new Message("Perfil Editado"), HttpStatus.OK);
-  }
-  
-  @DeleteMapping("/profile/{id}")
-  public ResponseEntity<?> deleteProfile(@PathVariable Long id) {
-    profServ.deleteProfile(id);
-    return new ResponseEntity(new Message("Perfil borrado"), HttpStatus.OK);
-  }
-
 }
