@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ar.com.matiasgaleano.Portfolio.model;
 
 import javax.persistence.Column;
@@ -15,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class ProfileData {
+public class Profile {
   
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,13 +20,13 @@ public class ProfileData {
   private String subtitle;
   private String adress;
   private String image;
-  @Column(length=1000)
+  @Column(columnDefinition="TEXT")
   private String description;
 
-  public ProfileData() {
+  public Profile() {
   }
 
-  public ProfileData(Long id, String name, String subtitle, String adress, String image, String description) {
+  public Profile(Long id, String name, String subtitle, String adress, String image, String description) {
     this.id = id;
     this.name = name;
     this.subtitle = subtitle;

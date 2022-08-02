@@ -1,10 +1,10 @@
 package ar.com.matiasgaleano.Portfolio.repository;
 
-import ar.com.matiasgaleano.Portfolio.model.ProfileData;
+import ar.com.matiasgaleano.Portfolio.model.Profile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProfileDataRepository extends JpaRepository<ProfileData, Long>{
+public interface ProfileDataRepository extends JpaRepository<Profile, Long>{
   
 }

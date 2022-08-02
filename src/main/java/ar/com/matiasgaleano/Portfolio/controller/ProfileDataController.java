@@ -1,6 +1,6 @@
 package ar.com.matiasgaleano.Portfolio.controller;
 
-import ar.com.matiasgaleano.Portfolio.model.ProfileData;
+import ar.com.matiasgaleano.Portfolio.model.Profile;
 import ar.com.matiasgaleano.Portfolio.service.interfaces.IProfileDataService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,18 +22,18 @@ public class ProfileDataController {
   private IProfileDataService dataServ;
   
   @GetMapping("/profile")
-  public ResponseEntity<List<ProfileData>> getProfile() {
+  public ResponseEntity<List<Profile>> getProfile() {
     return new ResponseEntity(dataServ.getProfiles(), HttpStatus.OK);
   }
 
   @PostMapping("/profile")
-  public ResponseEntity<?> postProfile(ProfileData prof) {
+  public ResponseEntity<?> postProfile(Profile prof) {
     dataServ.addProfile(prof);
     return new ResponseEntity(new Message("Perfil Creado"), HttpStatus.OK);
   }
 
   @PutMapping("/profile")
-  public ResponseEntity<?> editProfile(ProfileData prof) {
+  public ResponseEntity<?> editProfile(Profile prof) {
     dataServ.editProfile(prof);
     return new ResponseEntity(new Message("Perfil Editado"), HttpStatus.OK);
   }
