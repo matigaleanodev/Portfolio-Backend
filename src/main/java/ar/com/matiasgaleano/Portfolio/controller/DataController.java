@@ -2,12 +2,14 @@ package ar.com.matiasgaleano.Portfolio.controller;
 
 import ar.com.matiasgaleano.Portfolio.model.Education;
 import ar.com.matiasgaleano.Portfolio.model.HardSkill;
+import ar.com.matiasgaleano.Portfolio.model.Profile;
 import ar.com.matiasgaleano.Portfolio.model.Project;
 import ar.com.matiasgaleano.Portfolio.model.SoftSkill;
 import ar.com.matiasgaleano.Portfolio.model.Work;
 import ar.com.matiasgaleano.Portfolio.service.interfaces.IEducationService;
 import ar.com.matiasgaleano.Portfolio.service.interfaces.IHardSkillService;
 import ar.com.matiasgaleano.Portfolio.service.interfaces.IImageService;
+import ar.com.matiasgaleano.Portfolio.service.interfaces.IProfileService;
 import ar.com.matiasgaleano.Portfolio.service.interfaces.IProjectService;
 import ar.com.matiasgaleano.Portfolio.service.interfaces.ISoftSkillService;
 import ar.com.matiasgaleano.Portfolio.service.interfaces.IWorkService;
@@ -47,6 +49,9 @@ public class DataController {
 
   @Autowired
   private ISoftSkillService sSkillServ;
+  
+   @Autowired
+  private IProfileService profServ;
 
   @PostMapping("/image")
   public ResponseEntity<?> addImage(@RequestParam("file") MultipartFile image) {
@@ -204,6 +209,29 @@ public class DataController {
   public ResponseEntity<?> deleteSSkill(@PathVariable Long id) {
     sSkillServ.deleteSkill(id);
     return new ResponseEntity(new Message("Skill Borrada"), HttpStatus.OK);
+  }
+  
+  @GetMapping("/profile")
+  public ResponseEntity<List<Profile>> getProfile() {
+    return new ResponseEntity(profServ.getProfile(), HttpStatus.OK);
+  }
+
+  @PostMapping("/profile")
+  public ResponseEntity<?> postProfile(Profile prof) {
+    profServ.addProfile(prof);
+    return new ResponseEntity(new Message("Perfil Creado"), HttpStatus.OK);
+  }
+
+  @PutMapping("/profile")
+  public ResponseEntity<?> editProfile(Profile prof) {
+    profServ.editProfile(prof);
+    return new ResponseEntity(new Message("Perfil Editado"), HttpStatus.OK);
+  }
+  
+  @DeleteMapping("/profile/{id}")
+  public ResponseEntity<?> deleteProfile(@PathVariable Long id) {
+    profServ.deleteProfile(id);
+    return new ResponseEntity(new Message("Perfil borrado"), HttpStatus.OK);
   }
 
 }
