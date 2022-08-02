@@ -1,7 +1,7 @@
 package ar.com.matiasgaleano.Portfolio.service;
 
 import ar.com.matiasgaleano.Portfolio.service.interfaces.IProfileService;
-import ar.com.matiasgaleano.Portfolio.model.Perfil;
+import ar.com.matiasgaleano.Portfolio.model.Profile;
 import ar.com.matiasgaleano.Portfolio.repository.ProfileRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,17 +14,17 @@ public class ProfileService implements IProfileService {
   public ProfileRepository profRepo;
 
   @Override
-  public List<Perfil> getProfile() {
+  public List<Profile> getProfile() {
     return profRepo.findAll();
   }
 
   @Override
-  public void postProfile(Perfil prof) {
+  public void postProfile(Profile prof) {
     profRepo.save(prof);
   }
 
   @Override
-  public void editProfile(Perfil prof) {
+  public void editProfile(Profile prof) {
     profRepo.save(prof);
   }
   
