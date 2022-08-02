@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Profile {
+public class Perfil {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,10 +23,10 @@ public class Profile {
   @Column(columnDefinition = "TEXT")
   private String description;
 
-  public Profile() {
+  public Perfil() {
   }
 
-  public Profile(Long id, String name, String subtitle, String adress, String image, String description) {
+  public Perfil(Long id, String name, String subtitle, String adress, String image, String description) {
     this.id = id;
     this.name = name;
     this.subtitle = subtitle;
