@@ -35,6 +35,4 @@ public class Profile {
     this.description = description;
   }
 
-  
-
 }
