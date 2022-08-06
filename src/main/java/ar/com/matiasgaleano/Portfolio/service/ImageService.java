@@ -45,8 +45,7 @@ public class ImageService implements IImageService {
     String absPath = root.toFile().getAbsolutePath();
 	  Path completePath = Paths.get(absPath + "//" + name);
 	  try {
-	//	byte[] bytesImage = Files.readAllBytes(completePath);
-	//	return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(bytesImage);
+	
     FileSystemResource resource = new FileSystemResource(completePath);
             return ResponseEntity.ok()
             .contentType(MediaType.parseMediaType(Files.probeContentType(completePath)))
