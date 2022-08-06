@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -39,12 +41,16 @@ public class ImageService implements IImageService {
   }
 
   @Override
-  public ResponseEntity<byte[]> loadImage(String name) {
+  public ResponseEntity<Resource> loadImage(String name) {
     String absPath = root.toFile().getAbsolutePath();
 	  Path completePath = Paths.get(absPath + "//" + name);
 	  try {
-		byte[] bytesImage = Files.readAllBytes(completePath);
-		return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(bytesImage);
+	//	byte[] bytesImage = Files.readAllBytes(completePath);
+	//	return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(bytesImage);
+    FileSystemResource resource = new FileSystemResource(completePath);
+            return ResponseEntity.ok()
+            .contentType(MediaType.parseMediaType(Files.probeContentType(completePath)))
+            .body(resource);
 	  } catch (IOException e) {
 		throw new RuntimeException("No se puede cargar la imagen. Error " + e.getMessage());
 	  }
