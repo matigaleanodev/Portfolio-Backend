@@ -9,6 +9,7 @@ import ar.com.matiasgaleano.Portfolio.service.interfaces.IProjectService;
 import ar.com.matiasgaleano.Portfolio.service.interfaces.IWorkService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -45,7 +46,7 @@ public class DataController {
   }
 
   @GetMapping(path = {"/image/{name}"})
-  public ResponseEntity<byte[]> loadImage(@PathVariable("name") String name) {
+  public ResponseEntity<Resource> loadImage(@PathVariable("name") String name) {
     return imgServ.loadImage(name);
   }
 
