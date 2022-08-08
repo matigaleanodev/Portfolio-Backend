@@ -17,10 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class ProfileDataController {
-  
+
   @Autowired
   private IProfileDataService dataServ;
-  
+
+  @GetMapping("/init")
+  public ResponseEntity<?> initApi() {
+    return new ResponseEntity(new Message("Api iniciada"), HttpStatus.OK);
+  }
+
   @GetMapping("/profile")
   public ResponseEntity<List<Profile>> getProfile() {
     return new ResponseEntity(dataServ.getProfiles(), HttpStatus.OK);
@@ -37,11 +42,11 @@ public class ProfileDataController {
     dataServ.editProfile(prof);
     return new ResponseEntity(new Message("Perfil Editado"), HttpStatus.OK);
   }
-  
+
   @DeleteMapping("/profile/{id}")
   public ResponseEntity<?> deleteProfile(@PathVariable Long id) {
     dataServ.deleteProfile(id);
     return new ResponseEntity(new Message("Perfil borrado"), HttpStatus.OK);
   }
-  
+
 }
